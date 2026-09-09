@@ -33,3 +33,9 @@ int main() {
     return 0;
 }
 
+//funcion consultar vida
+void ConsultarVida(int vida ){
+
+	cout<<"Vida actual: "<<vida<<endl;
+
+}

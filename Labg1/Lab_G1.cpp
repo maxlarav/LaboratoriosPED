@@ -19,6 +19,18 @@ El programa deberá demostrar el funcionamiento de las tres funciones utilizando
 */
 #include <iostream>
 using namespace std;
+int daño = 15;
+
+void atacar(int *vida, int *daño)
+{
+    *vida = *vida - *daño;
+
+    if (*vida < 0)
+    {
+        *vida = 0;
+    }
+}
+
 
 int main() {
     int vida = 100;

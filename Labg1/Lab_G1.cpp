@@ -1,53 +1,97 @@
-/* Juego RPG - Sanador
-En un pueblo, los heroes llegan a la enfermeria con distintos niveles de vida. Los aprendices de curandero quieren experimentar cómo cambia la vida de un personaje cuando realmente lo curan o lo
-lo atacan.
-A partir de las funciones proporcionadas, implemente las tres operaciones solicitadas, aplicando correctamente cada mecanismo de paso parámetros
 
-Funciones por implementar: 
-Curar, realizar una curacion real modificando la vida mediante referencia. 
-
-Requisitos del sistema: 
-La funcion main() deberá encargarse de crear y manejar la vida del personaje. 
-La vida inicial del personaje debe ser de 100 puntos
-la función curar (int &vida, int puntos) deberá aumentar la vida, modificando el valor mediante puntero, si la vida tiene 100 puntos maximos no se le podra aumentar vida, esto solo es si recibe daño
-No se permiten cantidades negativas en las operaciones de curación o ataque. 
-La vida del personaje no puede superar los 100 puntos.
-La vida del personaje no puede ser menor que 0 puntos. 
-Se deberán implementar validaciones mediante if para controlar las condiciones anteriores. 
-Cada operación deberá mostrar un mensaje claro indicando si fue realizada correctamente o s iprodujo un error.
-El programa deberá demostrar el funcionamiento de las tres funciones utilizando datos quedamados (hardcoded) dentro de la función main() o solicitarlos al usuario
-*/
 #include <iostream>
+#include <string>
 using namespace std;
-int daño = 15;
 
-void atacar(int *vida, int *daño)
-{
-    *vida = *vida - *daño;
 
-    if (*vida < 0)
-    {
-        *vida = 0;
+void ConsultarVida(int vida) {
+    cout << "Vida actual: " << vida << endl;
+}
+
+void curar(int &vida, int puntos) {
+
+    if (puntos < 0) {
+        cout << "Error: no se pueden utilizar puntos negativos para curar." << endl;
+        return;
     }
+
+    if (vida == 100) {
+        cout << "Error: el personaje ya tiene 100 puntos de vida." << endl;
+        return;
+    }
+
+    vida += puntos;
+
+    if (vida > 100) {
+        vida = 100;
+        cout << "Curacion realizada, pero la vida se ajusto al maximo de 100." << endl;
+    } else {
+        cout << "Curacion realizada correctamente." << endl;
+    }
+
+    cout << "Vida actual: " << vida << endl;
+}
+
+void atacar(int &vida, int puntos) {
+
+    if (puntos < 0) {
+        cout << "Error: no se pueden utilizar puntos negativos para atacar." << endl;
+        return;
+    }
+
+    vida -= puntos;
+
+    if (vida < 0) {
+        vida = 0;
+        cout << "Ataque realizado. La vida llego a 0." << endl;
+    } else {
+        cout << "Ataque realizado correctamente." << endl;
+    }
+
+    cout << "Vida actual: " << vida << endl;
 }
 
 
 int main() {
+
     int vida = 100;
     string personaje;
-    cout << "Bienvenido al juego RPG - Sanador" << endl;
-    cout << "La vida inicial del personaje es: " << vida << endl;
-    cout << "Ingrese el nombre del personaje: " << endl;
-    cin >> personaje;
-    cout << "Personaje seleccionado: " << personaje << endl;
 
+    cout << "======================================" << endl;
+    cout << "       JUEGO RPG - SANADOR" << endl;
+    cout << "======================================" << endl;
+
+    cout << "Ingrese el nombre del personaje: ";
+    cin >> personaje;
+
+    cout << endl;
+    cout << "Personaje seleccionado: " << personaje << endl;
+    cout << "Vida inicial: " << vida << endl;
+
+    cout << endl;
+    cout << "--- CONSULTAR VIDA ---" << endl;
+    ConsultarVida(vida);
+
+    cout << endl;
+    cout << "--- CURACION ---" << endl;
+    curar(vida, 20);
+
+    cout << endl;
+    cout << "--- ATAQUE ---" << endl;
+    atacar(vida, 40);
+
+    cout << endl;
+    cout << "--- CONSULTAR VIDA ---" << endl;
+    ConsultarVida(vida);
+
+    cout << endl;
+    cout << "--- CURACION ---" << endl;
+    curar(vida, 20);
+
+    cout << endl;
+    cout << "======================================" << endl;
+    cout << "Vida final de " << personaje << ": " << vida << endl;
+    cout << "======================================" << endl;
 
     return 0;
-}
-
-//funcion consultar vida
-void ConsultarVida(int vida ){
-
-	cout<<"Vida actual: "<<vida<<endl;
-
 }

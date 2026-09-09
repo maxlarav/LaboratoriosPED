@@ -19,6 +19,7 @@ El programa deberá demostrar el funcionamiento de las tres funciones utilizando
 */
 #include <iostream>
 using namespace std;
+
 int main() {
     int vida = 100;
     string personaje;
@@ -31,3 +32,4 @@ int main() {
 
     return 0;
 }
+
